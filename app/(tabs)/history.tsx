@@ -8,7 +8,7 @@ import { radius } from "@/constants/radius";
 import { spacing } from "@/constants/spacing";
 import { useUIStore } from "@/store/uiStore";
 
-export default function HistoryScreen(): React.JSX.Element {
+export default function HistoryScreen() {
   const items = useUIStore((state) => state.items);
   const completed = items.filter((item) => item.status === "completed");
   const expired = items.filter((item) => item.status === "expired");

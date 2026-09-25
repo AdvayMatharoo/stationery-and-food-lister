@@ -9,7 +9,7 @@ import { radius } from "@/constants/radius";
 import { spacing } from "@/constants/spacing";
 import { useUIStore } from "@/store/uiStore";
 
-export default function ItemDetailsScreen(): React.JSX.Element {
+export default function ItemDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const item = useUIStore((state) => state.items.find((entry) => entry.id === id));
 

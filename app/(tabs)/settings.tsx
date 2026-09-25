@@ -16,7 +16,7 @@ const rows = [
   "Data & privacy",
 ] as const;
 
-export default function SettingsScreen(): React.JSX.Element {
+export default function SettingsScreen() {
   return (
     <Screen>
       <SectionHeader title="Settings" />

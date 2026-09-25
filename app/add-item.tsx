@@ -13,7 +13,7 @@ import { spacing } from "@/constants/spacing";
 import { useUIStore } from "@/store/uiStore";
 import type { ItemCategory } from "@/types/item";
 
-export default function AddItemScreen(): React.JSX.Element {
+export default function AddItemScreen() {
   const router = useRouter();
   const addItem = useUIStore((state) => state.addItem);
 

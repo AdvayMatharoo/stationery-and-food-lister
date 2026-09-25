@@ -3,7 +3,7 @@ import { Clock3, Lightbulb, ListChecks, Settings } from "lucide-react-native";
 
 import { colors } from "@/constants/colors";
 
-export default function TabsLayout(): React.JSX.Element {
+export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{

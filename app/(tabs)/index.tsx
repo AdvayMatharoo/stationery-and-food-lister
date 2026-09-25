@@ -19,7 +19,7 @@ const filterOptions: { label: string; value: ItemFilter }[] = [
   { label: "Stationery", value: "stationery" },
 ];
 
-export default function TodayScreen(): React.JSX.Element {
+export default function TodayScreen() {
   const router = useRouter();
   const items = useUIStore((state) => state.items);
   const toggleItemCompleted = useUIStore((state) => state.toggleItemCompleted);

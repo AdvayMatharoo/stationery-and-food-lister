@@ -8,7 +8,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { queryClient } from "@/lib/queryClient";
 import { initializeDatabase } from "@/lib/sqlite";
 
-export default function RootLayout(): React.JSX.Element {
+export default function RootLayout() {
   useEffect(() => {
     void initializeDatabase();
   }, []);

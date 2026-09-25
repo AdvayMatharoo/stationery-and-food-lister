@@ -6,7 +6,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { createRecommendationService } from "@/services/recommendations";
 import { useUIStore } from "@/store/uiStore";
 
-export default function SuggestionsScreen(): React.JSX.Element {
+export default function SuggestionsScreen() {
   const items = useUIStore((state) => state.items);
 
   const { data } = useQuery({
