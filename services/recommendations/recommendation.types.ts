@@ -1,31 +1,10 @@
-export interface WearableSummaryInput {
-  sleepTrend?: unknown;
-  weightTrend?: unknown;
-  activitySummary?: unknown;
-  userReportedEnergy?: unknown;
-}
+import type { Item } from "@/types/item";
+import type { Recommendation } from "@/types/recommendation";
 
 export interface RecommendationInput {
-  currentItems: unknown[];
-  preferences: unknown;
-  shoppingHistory?: unknown;
-  healthSummary?: unknown;
-  dietPreferences?: unknown;
-  healthGoals?: unknown;
-  foodRestrictions?: unknown;
-  activeList?: unknown[];
-  completionHistory?: unknown;
-  dismissedSuggestions?: unknown[];
-  recurringItemBehavior?: unknown;
-  wearableSummary?: WearableSummaryInput;
-}
-
-export interface Recommendation {
-  id: string;
-  name: string;
-  category: "food" | "stationery";
-  reason: string;
-  confidence?: number;
+  currentItems: Item[];
+  preferences?: Record<string, string | number | boolean>;
+  shoppingHistory?: Item[];
 }
 
 export interface RecommendationService {

@@ -1,9 +1,9 @@
-export type CatalogCategory = "food" | "stationery";
+import type { ItemCategory } from "@/types/item";
 
 export interface CatalogSearchResult {
   id: string;
   name: string;
-  category: CatalogCategory;
+  category: ItemCategory;
   brand?: string;
   imageUrl?: string;
   nutrition?: {
@@ -18,7 +18,7 @@ export interface CatalogSearchResult {
 
 export interface CatalogSearchInput {
   query: string;
-  category?: CatalogCategory;
+  category?: ItemCategory;
   limit?: number;
 }
 

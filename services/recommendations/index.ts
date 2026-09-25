@@ -1,40 +1,35 @@
+import type { Recommendation } from "@/types/recommendation";
 import type {
-  Recommendation,
   RecommendationInput,
   RecommendationService,
 } from "./recommendation.types";
 
-export const RECOMMEND_ITEMS_FUNCTION_PATH = "/functions/v1/recommend-items";
+const mockRecommendations: Recommendation[] = [
+  {
+    id: "rec-greek-yoghurt",
+    name: "Greek Yoghurt",
+    category: "food",
+    reason: "High-protein staple often paired with your food list.",
+    confidence: 0.82,
+  },
+  {
+    id: "rec-blue-pens",
+    name: "Blue Pens",
+    category: "stationery",
+    reason: "Frequently recurring stationery item for weekly workflow.",
+    confidence: 0.74,
+  },
+];
 
-const hasFoodItems = (currentItems: unknown[]): boolean =>
-  currentItems.some((item) => {
-    const value = item as { itemCategory?: string; category?: string };
-    return value.itemCategory === "food" || value.category === "food";
-  });
-
-export class MockRecommendationService implements RecommendationService {
+class MockRecommendationService implements RecommendationService {
   async getRecommendations(input: RecommendationInput): Promise<Recommendation[]> {
-    const recommendations: Recommendation[] = [
-      {
-        id: "stationery-pen-pack",
-        name: "Ballpoint Pen Pack",
-        category: "stationery",
-        reason: "Commonly repurchased stationery essential.",
-        confidence: 0.72,
-      },
-    ];
+    const hasFood = input.currentItems.some((item) => item.category === "food");
 
-    if (hasFoodItems(input.currentItems)) {
-      recommendations.unshift({
-        id: "food-greek-yoghurt",
-        name: "Greek Yoghurt",
-        category: "food",
-        reason: "Fits a high-protein food recommendation profile.",
-        confidence: 0.79,
-      });
+    if (!hasFood) {
+      return mockRecommendations.filter((item) => item.category !== "food");
     }
 
-    return recommendations;
+    return mockRecommendations;
   }
 }
 

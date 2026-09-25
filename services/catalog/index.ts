@@ -4,11 +4,9 @@ import type {
   CatalogService,
 } from "./catalog.types";
 
-export const SEARCH_CATALOG_FUNCTION_PATH = "/functions/v1/search-catalog";
-
-const MOCK_CATALOG: CatalogSearchResult[] = [
+const mockCatalog: CatalogSearchResult[] = [
   {
-    id: "food-greek-yoghurt-1",
+    id: "food-greek-yoghurt",
     name: "Greek Yoghurt",
     category: "food",
     brand: "Sample Foods",
@@ -16,35 +14,32 @@ const MOCK_CATALOG: CatalogSearchResult[] = [
     nutrition: { calories: 130, protein: 12, sugar: 5, carbohydrates: 7, fat: 5 },
   },
   {
-    id: "stationery-notebook-1",
-    name: "A5 Notebook",
+    id: "stationery-a4-paper",
+    name: "A4 Paper",
     category: "stationery",
     brand: "Paper Co",
-    tags: ["notes", "paper"],
+    tags: ["office", "printing"],
   },
 ];
 
 const normalize = (value: string): string => value.trim().toLowerCase();
 
-export class MockCatalogService implements CatalogService {
+class MockCatalogService implements CatalogService {
   async searchCatalog(input: CatalogSearchInput): Promise<CatalogSearchResult[]> {
     const query = normalize(input.query);
-    const limit = Math.max(1, input.limit ?? 20);
 
-    const matches = MOCK_CATALOG.filter((item) => {
-      const matchesQuery =
-        query.length === 0 ||
-        normalize(item.name).includes(query) ||
-        normalize(item.brand ?? "").includes(query) ||
-        (item.tags ?? []).some((tag) => normalize(tag).includes(query));
+    return mockCatalog
+      .filter((item) => {
+        const matchesQuery =
+          !query ||
+          normalize(item.name).includes(query) ||
+          normalize(item.brand ?? "").includes(query) ||
+          (item.tags ?? []).some((tag) => normalize(tag).includes(query));
 
-      const matchesCategory =
-        !input.category || item.category === input.category;
-
-      return matchesQuery && matchesCategory;
-    });
-
-    return matches.slice(0, limit);
+        const matchesCategory = !input.category || item.category === input.category;
+        return matchesQuery && matchesCategory;
+      })
+      .slice(0, input.limit ?? 10);
   }
 }
 
